@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block body %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <form action="/">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Name</th>
+                    <th>Shares</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stock in stocks %}
+                <tr>
+                    {% if stock.tshares %}
+                        <td>{{ stock.symbol }}</td>
+                        <td>{{ stock.stock }}</td>
+                        <td>{{ stock.tshares }}</td>
+                        <td>{{ usd(stock.price) }}</td>
+                        <td>{{ usd(stock.tshares * stock.price) }}</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr lass="thead-dark">
+                    <td colspan="3"></td>
+                    <td>CASH</td>
+                    <td>{{ usd(cash) }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3"></td>
+                    <td>TOTAL</td>
+                    <td>{{ usd(total) }}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </form>
+
+{% endblock %}
